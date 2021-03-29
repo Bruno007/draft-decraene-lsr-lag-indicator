@@ -52,13 +52,21 @@
 			<t>To advertise that a layer-three link is composed of multiple layer-two sub-components this document defines a new bit in the IS-IS link-attribute sub-TLV <xref target="RFC5029">RFC 5029</xref>.</t>
 			<t>L2 LAG (Link Aggregation Group) TBD1. When set, this layer-three link is composed of multiple layer-two sub-components performing per flow load balancing.</t>
 			</section>
+			
 			<section anchor="OSPF_extension" title="OSPF extension">
 			<t>To advertise that a layer-three link is composed of multiple layer-two sub-components this document defines a new bit in the OSPF Link Attributes Bits TLV <xref target="I-D.ietf-lsr-dynamic-flooding"></xref>.</t>
 			<t>L2 LAG (Link Aggregation Group) TBD2. When set, this layer-three link is composed of multiple layer-two sub-components performing per flow load balancing.</t>
 
 			</section>
+		</section>
+		
+		<section anchor="OPS_considerations" title="Operational considerations">
+			<t>A node supporting this extension SHOULD automatically advertise the L2 LAG flag for IP links composed of multiple layer-two sub-components. Configuration knob MAY be provided to override this default.</t>
+			<t>In order to handle nodes not supporting this extension, network operator may need to use an admin group (color) <xref target="RFC5305"/> <xref target="RFC7308"/> in order to flag those links on legacy nodes.</t>
+
 
 		</section>
+		
 		<section anchor="IANA_Consideration" title="IANA Considerations">
 			<section anchor="IANA_ISIS" title="IS-IS">
 			<t>IANA is requested to allocate one bit value from the registry: link-attribute bit values for sub-TLV 19 of TLV 22 (Extended IS reachability TLV).</t>
@@ -106,7 +114,12 @@
 			<?rfc include="reference.I-D.ietf-lsr-dynamic-flooding"?>
 
 		</references>
-
+		<references title="Informative References">
+			<?rfc include="reference.RFC.5305"?>
+			<?rfc include="reference.RFC.7308"?>
+		</references>
+		
+		
 		<section anchor="authors-notes" title="Changes / Author Notes">
 			<t>[RFC Editor: Please remove this section before publication]</t>
 			<t>00: Initial version.</t>
