@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-decraene-lsr-lag-indication-00" ipr="trust200902">
+<rfc category="std" docName="draft-decraene-lsr-lag-indication-01" ipr="trust200902">
 	<front>
 		<title abbrev="LAG indication">LAG indication</title>
 		<author fullname="Bruno Decraene" initials="B." surname="Decraene">
@@ -20,18 +20,18 @@
 			</address>
 		</author>
 		<author initials="S." surname="Hegde" fullname="Shraddha Hegde">
-    <organization>Juniper Networks Inc.</organization>
-    <address>
-      <postal>
-        <street>Exora Business Park</street>
-        <city>Bangalore</city>
-        <region>KA</region>
-        <code>560103</code>
-        <country>India</country>
-      </postal>
-      <email>shraddha@juniper.net</email>
-    </address>
-  </author>
+			<organization>Juniper Networks Inc.</organization>
+			<address>
+				<postal>
+					<street>Exora Business Park</street>
+					<city>Bangalore</city>
+					<region>KA</region>
+					<code>560103</code>
+					<country>India</country>
+				</postal>
+				<email>shraddha@juniper.net</email>
+			</address>
+		</author>
 		<date year="2021"/>
 		<abstract>
 			<t>This document defines a new link flag to advertise that a layer-three link is composed of multiple layer-two sub-links, such as when this link is a Link Aggregation Group (LAG). This allows a large single flow (an elephant flow) to be aware that the link capacity will be lower than expected as this single flow is not load-balanced across the multiple layer-two sub-links. A path computation logic may use that information to route that elephant flow along a different path.</t>
@@ -43,87 +43,101 @@
 			<t>This document defines a new link flag to signal that an IP link is a Link Aggregate Group composed of multiple layer two sub-links. This flag may be automatically be set by routing nodes connected to such links, without requiring manual tagging by the network operator. A path computation logic such as a PCE or a CSPF computation on the ingress, may use that information to avoid such links for elephant flows.</t>
 
 			<section anchor="Language" title="Requirements Language">
-				<t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119">RFC 2119</xref> <xref target="RFC8174">RFC 8174</xref> when, and only when, they appear in all capitals, as shown here.</t>
+				<t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <xref target="RFC2119">RFC 2119</xref>
+					<xref target="RFC8174">RFC 8174</xref> when, and only when, they appear in all capitals, as shown here.</t>
 			</section>
 		</section>
 
 		<section anchor="IGP_extensions" title="Protocol extensions">
 			<section anchor="ISIS_extension" title="IS-IS extension">
-			<t>To advertise that a layer-three link is composed of multiple layer-two sub-components this document defines a new bit in the IS-IS link-attribute sub-TLV <xref target="RFC5029">RFC 5029</xref>.</t>
-			<t>L2 LAG (Link Aggregation Group) TBD1. When set, this layer-three link is composed of multiple layer-two sub-components performing per flow load balancing.</t>
+				<t>To advertise that a layer-three link is composed of multiple layer-two sub-components this document defines a new bit in the IS-IS link-attribute sub-TLV <xref target="RFC5029">RFC 5029</xref>.
+				</t>
+				<t>L2 LAG (Link Aggregation Group) TBD1. When set, this layer-three link is composed of multiple layer-two sub-components performing per flow load balancing.</t>
 			</section>
-			
+
 			<section anchor="OSPF_extension" title="OSPF extension">
-			<t>To advertise that a layer-three link is composed of multiple layer-two sub-components this document defines a new bit in the OSPF Link Attributes Bits TLV <xref target="I-D.ietf-lsr-dynamic-flooding"></xref>.</t>
-			<t>L2 LAG (Link Aggregation Group) TBD2. When set, this layer-three link is composed of multiple layer-two sub-components performing per flow load balancing.</t>
+				<t>To advertise that a layer-three link is composed of multiple layer-two sub-components this document defines a new bit in the OSPF Link Attributes Bits TLV <xref target="I-D.ietf-lsr-dynamic-flooding"></xref>.
+				</t>
+				<t>L2 LAG (Link Aggregation Group) TBD2. When set, this layer-three link is composed of multiple layer-two sub-components performing per flow load balancing.</t>
 
 			</section>
 		</section>
-		
+
 		<section anchor="OPS_considerations" title="Operational considerations">
 			<t>A node supporting this extension SHOULD automatically advertise the L2 LAG flag for IP links composed of multiple layer-two sub-components. Configuration knob MAY be provided to override this default.</t>
-			<t>In order to handle nodes not supporting this extension, network operator may need to use an admin group (color) <xref target="RFC5305"/> <xref target="RFC7308"/> in order to flag those links on legacy nodes.</t>
+			<t>In order to handle nodes not supporting this extension, network operator may need to use an admin group (color) <xref target="RFC5305"/>
+			<xref target="RFC7308"/>
+ in order to flag those links on legacy nodes.</t>
 
 
-		</section>
-		
-		<section anchor="IANA_Consideration" title="IANA Considerations">
-			<section anchor="IANA_ISIS" title="IS-IS">
+	</section>
+
+	<section anchor="IANA_Consideration" title="IANA Considerations">
+		<section anchor="IANA_ISIS" title="IS-IS">
 			<t>IANA is requested to allocate one bit value from the registry: link-attribute bit values for sub-TLV 19 of TLV 22 (Extended IS reachability TLV).</t>
-				
-				<figure anchor="IANA_ISIS_Registration" title=''><preamble></preamble><artwork align="center">
+
+			<figure anchor="IANA_ISIS_Registration" title=''>
+				<preamble></preamble>
+				<artwork align="center">
    Value   Name
    ----    --------------------------------
    TBD1    L2 LAG (Link Aggregation Group)
-				</artwork></figure>
-			</section>
-			
-			<section anchor="IANA_OSPF" title="OSPF">
-				<t>IANA is requested to allocate one bit number from the registry: OSPF Link Attributes Sub-TLV Bit Values.</t>
-				
-				<figure anchor="IANA_OSPF_Registration" title=''><preamble></preamble><artwork align="center">
+				</artwork>
+			</figure>
+		</section>
+
+		<section anchor="IANA_OSPF" title="OSPF">
+			<t>IANA is requested to allocate one bit number from the registry: OSPF Link Attributes Sub-TLV Bit Values.</t>
+
+			<figure anchor="IANA_OSPF_Registration" title=''>
+				<preamble></preamble>
+				<artwork align="center">
    Bit Number   Description
    ----------   --------------------------------
    TBD2         L2 LAG (Link Aggregation Group)
-				</artwork></figure>
-			</section>
-		
-		
+				</artwork>
+			</figure>
 		</section>
-		<section anchor="Security" title="Security Considerations" toc="default">
-			<t>This extension advertises additional information and capabilities about a link.</t>
-			<t>An attacker having access to this information would gain knowledge that this link has sub components and that sending a large amount of traffic via a single flow (hence not a DOS) is more likely to overload that sub-component. On the other hand, this overloading would be limited to this specific sub-component and hence not affect other sub-component.</t>
-			<t>An attacker been capable of adding this information may gain ability to change the routing of some flow crossing the links, typically large elephant flows specifically configured to avoid such link.</t>
-			<t>An attacker been capable of removing this information may gain the ability to change the routing and direct a large elephant flow on this link, which would overload a sub component of this link and likely create packet drop for this specific flow.</t>
-			<t>However, in those two cases, the attacker would equally have the capability to change other routing information such as the link metric, link usability and any link characteristics. Hence this new information does not add new security considerations. Besides, as with others TLV advertisements, the use of a cryptographic authentication as defined in <xref target="RFC5304"/> or
-				<xref target="RFC5310"/> allows the authentication of the peer and the integrity of the message and remove the ability for an attacker to modify such information.</t>
-			<t>.</t>
-		</section>
-		<section anchor="Acknowledgments" title="Acknowledgments">
-			<t>TBD.</t>
-		</section>
-	</middle>
-	<back>
-		<references title="Normative References">
-			<?rfc include="reference.RFC.2119"?>
-			<?rfc include="reference.RFC.5029"?>
-			
-			<?rfc include="reference.RFC.8174"?>
-			<?rfc include="reference.RFC.5304"?>
-			<?rfc include="reference.RFC.5310"?>
-			<?rfc include="reference.I-D.ietf-lsr-dynamic-flooding"?>
 
-		</references>
-		<references title="Informative References">
-			<?rfc include="reference.RFC.5305"?>
-			<?rfc include="reference.RFC.7308"?>
-		</references>
-		
-		
-		<section anchor="authors-notes" title="Changes / Author Notes">
-			<t>[RFC Editor: Please remove this section before publication]</t>
-			<t>00: Initial version.</t>
 
-		</section>
-	</back>
+	</section>
+	<section anchor="Security" title="Security Considerations" toc="default">
+		<t>This extension advertises additional information and capabilities about a link.</t>
+		<t>An attacker having access to this information would gain knowledge that this link has sub components and that sending a large amount of traffic via a single flow (hence not a DOS) is more likely to overload that sub-component. On the other hand, this overloading would be limited to this specific sub-component and hence not affect other sub-component.</t>
+		<t>An attacker been capable of adding this information may gain ability to change the routing of some flow crossing the links, typically large elephant flows specifically configured to avoid such link.</t>
+		<t>An attacker been capable of removing this information may gain the ability to change the routing and direct a large elephant flow on this link, which would overload a sub component of this link and likely create packet drop for this specific flow.</t>
+		<t>However, in those two cases, the attacker would equally have the capability to change other routing information such as the link metric, link usability and any link characteristics. Hence this new information does not add new security considerations. Besides, as with others TLV advertisements, the use of a cryptographic authentication as defined in <xref target="RFC5304"/>
+ or
+		<xref target="RFC5310"/>
+ allows the authentication of the peer and the integrity of the message and remove the ability for an attacker to modify such information.</t>
+	<t>.</t>
+</section>
+<section anchor="Acknowledgments" title="Acknowledgments">
+	<t>TBD.</t>
+</section>
+</middle>
+<back>
+<references title="Normative References">
+	<?rfc include="reference.RFC.2119"?>
+	<?rfc include="reference.RFC.5029"?>
+
+	<?rfc include="reference.RFC.8174"?>
+	<?rfc include="reference.RFC.5304"?>
+	<?rfc include="reference.RFC.5310"?>
+	<?rfc include="reference.I-D.ietf-lsr-dynamic-flooding"?>
+
+</references>
+<references title="Informative References">
+	<?rfc include="reference.RFC.5305"?>
+	<?rfc include="reference.RFC.7308"?>
+</references>
+
+
+<section anchor="authors-notes" title="Changes / Author Notes">
+	<t>[RFC Editor: Please remove this section before publication]</t>
+	<t>00: Initial version.</t>
+	<t>01: Refresh.</t>
+
+</section>
+</back>
 </rfc>
