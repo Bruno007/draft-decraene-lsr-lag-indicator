@@ -13,4 +13,4 @@ http://xml2rfc.tools.ietf.org/cgi-bin/xml2rfc.cgi?url=https://raw.githubusercont
 
 And this should produce a diff between the most recently published ietf draft, and the latest version in the repository.
 //TBD (once we'll have a public ietf draft...)
-https://tools.ietf.org/rfcdiff?url1=draft-decraene-lsr-lag-indication&url2=https://tinyurl.com/jkkq3ed
+https://tools.ietf.org/rfcdiff?url1=draft-decraene-lsr-lag-indication&url2=https://tinyurl.com/ynn96r6p
