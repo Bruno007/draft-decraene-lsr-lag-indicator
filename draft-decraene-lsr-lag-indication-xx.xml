@@ -38,7 +38,7 @@
 					<email>joel.halpern@ericsson.com</email>
 			</address>
 		</author>
-		<date year="2021"/>
+		<date year="2022"/>
 		<abstract>
 			<t>This document defines a new link flag to advertise that a layer-three link is composed of multiple layer-two sub-links, such as when this link is a Link Aggregation Group (LAG). This allows a large single flow (an elephant flow) to be aware that the link capacity will be lower than expected as this single flow is not load-balanced across the multiple layer-two sub-links. A path computation logic may use that information to route that elephant flow along a different path.</t>
 		</abstract>
@@ -86,7 +86,7 @@
 			by encapsulating head ends for streams which are judged to need to avoid 
 			the LAGs.  Likely this would be coupled with a configured value 
 			representing the likely limit of LAG components for selecting when to 
-			use this flex-algo instance.</t>
+			use this flex-algo instance. Note that extending flex-algo requires every node to upgrade.</t>
 
 			<t>Another option is if the operator is using traffic engineering (either 
 			with a PCE or the head end doing the path selection).  The path selector 

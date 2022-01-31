@@ -12,5 +12,4 @@ You should be able generate the html version of the most recent XML commit using
 http://xml2rfc.tools.ietf.org/cgi-bin/xml2rfc.cgi?url=https://raw.githubusercontent.com/Bruno007/draft-decraene-lsr-lag-indicator/master/draft-decraene-lsr-lag-indication-xx.xml&modeAsFormat=html/ascii&type=toframe
 
 And this should produce a diff between the most recently published ietf draft, and the latest version in the repository.
-//TBD (once we'll have a public ietf draft...)
 https://tools.ietf.org/rfcdiff?url1=draft-decraene-lsr-lag-indication&url2=https://tinyurl.com/ynn96r6p
